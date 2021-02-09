@@ -8,7 +8,6 @@
           "containerPort": 3000
         }
       ],
-      "cpu": 256,
       "environment": [
         { "name": "DB_HOST"      , "value"  : "TEMPLATE_DB_HOST"     } ,
         { "name": "DB_USER"      , "value"  : "TEMPLATE_DB_USER"     } ,
@@ -16,7 +15,6 @@
         { "name": "DB_PORT"      , "value"  : "3306"     } ,
         { "name": "DB_DATABASE"  , "value"  : "test" }
       ],
-      "memory": 512,
       "image": "DOCKER_IMAGE",
       "name": "app"
     }
@@ -25,5 +23,7 @@
   "networkMode": "awsvpc",
   "requiresCompatibilities": [
     "FARGATE"
-  ]
+  ],
+  "cpu": "256",
+  "memory": "512"
 }
