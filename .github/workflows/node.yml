@@ -46,7 +46,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Set RDS_URL
-      run: echo ::set-output name=RDS_URL::$(aws rds describe-db-instances --output text --query "DBInstances[?DBClusterIdentifier == 'dev-node-app-rds'].Endpoint.Address")
+      run: echo ::set-output name=RDS_URL::$(aws rds describe-db-instances --output text --query "DBInstances[?DBInstanceIdentifier == 'dev-node-app-rds'].Endpoint.Address")
       id: rds
   
     - name: Replace task definition
