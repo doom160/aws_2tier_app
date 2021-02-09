@@ -49,11 +49,15 @@ jobs:
       run: echo ::set-output name=RDS_URL::$(aws rds describe-db-instances --output text --query "DBInstances[?DBInstanceIdentifier == 'dev-node-app-rds'].Endpoint.Address")
       id: rds
   
+    - name: Set ROLE_ARN
+      run: echo ::set-output name=ROLE-ARN::$(aws iam list-roles --output text --query "Roles[?RoleName == 'ecsTaskExecutionRole'].Arn")
+      id: role
+
     - name: Replace task definition
       uses: datamonsters/replace-action@v2
       with:
         files: 'tasks-definition/container.json'
-        replacements: 'DOCKER_IMAGE=${{ steps.login-ecr.outputs.registry }}/node_app:${{ github.sha }},TEMPLATE_DB_HOST=${{ steps.rds.outputs.RDS_URL }},TEMPLATE_DB_PASSWORD=${{ secrets.RDS_PASSWORD }},TEMPLATE_DB_USER=${{ secrets.RDS_USER }}'
+        replacements: 'DOCKER_IMAGE=${{ steps.login-ecr.outputs.registry }}/node_app:${{ github.sha }},TEMPLATE_DB_HOST=${{ steps.rds.outputs.RDS_URL }},TEMPLATE_DB_PASSWORD=${{ secrets.RDS_PASSWORD }},TEMPLATE_DB_USER=${{ secrets.RDS_USER }},TEMPLATE_ROLE_ARN=${{ steps.role.outputs.ROLE_ARN }}'
 
     - name: Read file
       run: cat tasks-definition/container.json
