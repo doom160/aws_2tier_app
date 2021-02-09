@@ -1,14 +1,6 @@
 {
   "containerDefinitions": [
     {
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "/ecs/node_app",
-          "awslogs-region": "ap-southeast-1",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
       "portMappings": [
         {
           "hostPort": 3000,
