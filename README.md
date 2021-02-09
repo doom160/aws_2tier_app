@@ -26,14 +26,14 @@ PRIMARY KEY (id)
    * RDS_USER
    * RDS_PASSWORD
 3. Branch off and PR Merge, it will be deployed to Dev ECS cluster
-4. Once Workflow completes, run follow command to get ALB Url
+4. Once Workflow completes, run follow command to get ALB Url \
 `aws elbv2 describe-load-balancers --output text --query "LoadBalancers[?LoadBalancerName =='node-app-lb'].DNSName"`
 ![Sample App](screenshots/outcome.jpg?raw=true "Sample App")
 
 ## CI/CD Workflow
 ![CI/CD](screenshots/github-workflow.jpg?raw=true "CI/CD")
 
-Since source code is stored in github, it can leverage on existing Github CI/CD i.e. Github workflow. It is ideal to adopt Github Flow branching strategy which is a variant of Thrunk based development.
+Since source code is stored in github, it can leverage on existing Github CI/CD i.e. Github workflow. It is ideal to adopt Github Flow branching strategy which is a variant of Trunk based development.
 
 ### DEV
 Reference: `.github/workflow/node.yml`
