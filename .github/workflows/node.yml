@@ -55,7 +55,7 @@ jobs:
       uses: datamonsters/replace-action@v2
       with:
         files: 'service.json'
-        replacements: 'DOCKER_IMAGE=${{ steps.login-ecr.outputs.registry }}/node_app:${{ github.sha }},TEMPLATE_DB_HOST=${{ env.RDS_URL }}',TEMPLATE_DB_PASSWORD=${{ secrets.RDS_PASSWORD }},TEMPLATE_DB_USER=${{ secrets.RDS_USER }}
+        replacements: 'DOCKER_IMAGE=${{ steps.login-ecr.outputs.registry }}/node_app:${{ github.sha }},TEMPLATE_DB_HOST=${{ env.RDS_URL }},TEMPLATE_DB_PASSWORD=${{ secrets.RDS_PASSWORD }},TEMPLATE_DB_USER=${{ secrets.RDS_USER }}'
 
     - name: Read file
       run: cat tasks-definition/service.json
