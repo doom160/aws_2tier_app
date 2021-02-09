@@ -26,5 +26,5 @@
   ],
   "cpu": "256",
   "memory": "512",
-  "exeuctionRoleArn" : "TEMPLATE_ROLE_ARN"
+  "executionRoleArn" : "TEMPLATE_ROLE_ARN"
 }
