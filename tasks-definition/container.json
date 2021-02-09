@@ -1,18 +1,14 @@
 {
   "containerDefinitions": [
     {
-      "dnsSearchDomains": null,
-      "environmentFiles": null,
       "logConfiguration": {
         "logDriver": "awslogs",
-        "secretOptions": null,
         "options": {
           "awslogs-group": "/ecs/node_app",
           "awslogs-region": "ap-southeast-1",
           "awslogs-stream-prefix": "ecs"
         }
       },
-      "entryPoint": null,
       "portMappings": [
         {
           "hostPort": 3000,
@@ -20,7 +16,6 @@
           "containerPort": 3000
         }
       ],
-      "linuxParameters": null,
       "cpu": 256,
       "environment": [
         { "name": "DB_HOST"      , "value"  : "TEMPLATE_DB_HOST"     } ,
@@ -29,36 +24,14 @@
         { "name": "DB_PORT"      , "value"  : "3306"     } ,
         { "name": "DB_DATABASE"  , "value"  : "test" }
       ],
-      "resourceRequirements": null,
-      "ulimits": null,
-      "dnsServers": null,
-      "mountPoints": [],
-      "workingDirectory": null,
-      "secrets": null,
-      "dockerSecurityOptions": null,
       "memory": 512,
-      "memoryReservation": null,
-      "volumesFrom": [],
-      "stopTimeout": null,
       "image": "DOCKER_IMAGE",
-      "startTimeout": null,
-      "firelensConfiguration": null,
-      "dependsOn": null,
-      "disableNetworking": null,
-      "interactive": null,
-      "healthCheck": null,
-      "essential": true,
-      "links": null,
-      "hostname": null,
-      "extraHosts": null,
-      "pseudoTerminal": null,
-      "user": null,
-      "readonlyRootFilesystem": null,
-      "dockerLabels": null,
-      "systemControls": null,
-      "privileged": null,
       "name": "app"
     }
   ] ,
-  "family": "node_app_task_definition"
+  "family": "node_app_task_definition",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ]
 }
