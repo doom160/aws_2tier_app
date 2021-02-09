@@ -24,9 +24,6 @@ jobs:
 
     - name: Test
       run: npm test
-
-    - name: Test
-      run: go test -v .
       
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -49,7 +46,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Set RDS_URL
-      run: echo ::set-env name=MEMCACHE_URL::$(aws elasticache describe-cache-clusters --cache-cluster-id go-elasticache --output text --show-cache-node-info --query 'CacheClusters[*].CacheNodes[*].Endpoint.Address')
+      run: echo ::set-env name=RDS_URL::$(aws rds describe-db-instances --output text --query "DBInstances[?DBClusterIdentifier == 'dev-node-app-rds'].Endpoint.Address")
   
     - name: Generate task definition file
       run: aws ecs describe-task-definition --task-definition go_redis_task_definition  --query taskDefinition > service.json
@@ -58,7 +55,7 @@ jobs:
       uses: datamonsters/replace-action@v2
       with:
         files: 'service.json'
-        replacements: 'DOCKER_IMAGE=${{ steps.login-ecr.outputs.registry }}/node_app,MEMCACHE_URL=${{ env.MEMCACHE_URL }}'
+        replacements: 'DOCKER_IMAGE=${{ steps.login-ecr.outputs.registry }}/node_app:${{ github.sha }},TEMPLATE_DB_HOST=${{ env.RDS_URL }}',TEMPLATE_DB_PASSWORD=${{ secrets.RDS_PASSWORD }},TEMPLATE_DB_USER=${{ secrets.RDS_USER }}
 
     - name: Read file
       run: cat tasks-definition/service.json

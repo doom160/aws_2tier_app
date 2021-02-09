@@ -22,13 +22,11 @@
     "linuxParameters": null,
     "cpu": 256,
     "environment": [
-      {
-        "DB_HOST" : "TEMPLATE_DB_HOST" ,
-        "DB_USER" : "TEMPLATE_DB_USER" ,
-        "DB_PASSWORD" : "TEMPLATE_DB_PASSWORD" ,
-        "DB_PORT" : "TEMPLATE_DB_PORT" ,
-        "DB_DATABASE" : "TEMPLATE_DB_DATABASE"
-      }
+      { "name": "DB_HOST"      , "value"  : "TEMPLATE_DB_HOST"     } ,
+      { "name": "DB_USER"      , "value"  : "TEMPLATE_DB_USER"     } ,
+      { "name": "DB_PASSWORD"  , "value"  : "TEMPLATE_DB_PASSWORD" } ,
+      { "name": "DB_PORT"      , "value"  : "3306"     } ,
+      { "name": "DB_DATABASE"  , "value"  : "test" }
     ],
     "resourceRequirements": null,
     "ulimits": null,

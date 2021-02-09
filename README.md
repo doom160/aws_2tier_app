@@ -21,3 +21,5 @@ PRIMARY KEY (id)
 ```
 
 
+`aws rds describe-db-instances --query "DBInstances[?DBInstanceIdentifier == 'dev-node-app-rds'].Endpoint.Address" --output text`
+
